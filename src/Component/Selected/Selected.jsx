@@ -14,7 +14,7 @@ function Selected() {
           <p className='lg:w-[653px] mb-4'>Career Hub is a responsive job search platform designed to help users discover and apply for jobs effortlessly. Built with React, it features a clean, modern interface and smooth navigation. The application integrates external APIs for real-time job listings and provides fast performance on all devices.</p>
           <div className="card-actions">
             <a href="https://career-hub-dream-job.netlify.app/">
-              <button className="flex items-center gap-2 bg-stone-300 text-neutral-900 dark:bg-black dark:text-stone-50 px-4 py-2 rounded-lg shadow-md transform hover:translate-x-2 transition duration-300">
+              <button className="flex items-center gap-2 bg-stone-300 text-neutral-900 dark:bg-black dark:text-stone-50 px-4 py-2 rounded-lg shadow-md transform hover:translate-x-4 transition duration-300">
                 See more <GoArrowRight />
               </button>
             </a>
@@ -33,7 +33,7 @@ function Selected() {
           <p className='lg:w-[653px] mb-4'>Getting Started: Set up a Next.js project, Pages and Routing, Data Fetching (SSG, SSR), API Routes, and more. Learn various styling options like CSS modules and global CSS.</p>
           <div className="card-actions">
             <a href="https://nextjs.org/docs">
-              <button className="flex items-center gap-2 bg-stone-300 text-neutral-900 dark:bg-black dark:text-stone-50 px-4 py-2 rounded-lg shadow-md transform hover:translate-x-2 transition duration-300">
+              <button className="flex items-center gap-2 bg-stone-300 text-neutral-900 dark:bg-black dark:text-stone-50 px-4 py-2 rounded-lg shadow-md transform hover:translate-x-4 transition duration-300">
                 See more <GoArrowRight />
               </button>
             </a>
@@ -52,7 +52,7 @@ function Selected() {
           <p className='lg:w-[653px] mb-4'>Learn the utility-first approach, responsive design, customization, and component creation with Tailwind CSS. Explore how to create reusable components.</p>
           <div className="card-actions">
             <a href="https://tailwindcss.com/">
-              <button className="flex items-center gap-2 bg-stone-300 text-neutral-900 dark:bg-black dark:text-stone-50 px-4 py-2 rounded-lg shadow-md transform hover:translate-x-2 transition duration-300">
+              <button className="flex items-center gap-2 bg-stone-300 text-neutral-900 dark:bg-black dark:text-stone-50 px-4 py-2 rounded-lg shadow-md transform hover:translate-x-4 transition duration-300">
                 See more <GoArrowRight />
               </button>
             </a>

@@ -2,23 +2,35 @@ import React from 'react';
 
 function Loader({ isDarkMode }) {
   return (
-    <div className={`flex justify-center items-center min-h-screen ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
-      <div className="relative flex justify-center items-center">
-        <div className={`absolute w-40 h-40 rounded-full opacity-30 ${isDarkMode ? 'bg-teal-400' : 'bg-indigo-500'} animate-ping`}></div>
-        
-        <div className={`animate-spin rounded-full h-32 w-32 border-t-4 ${isDarkMode ? 'border-t-teal-400' : 'border-t-indigo-500'} border-b-transparent shadow-lg`}></div>
-        
-        <div className="absolute w-24 h-24 rounded-full opacity-50 bg-transparent border-2 border-dashed border-gray-500 animate-spin-slow"></div>
-      </div>
+    <section
+      className={`flex justify-center items-center h-screen ${
+        isDarkMode ? 'bg-black' : 'bg-white'
+      }`}
+    >
+      <div className="relative">
+        {/* Animated "A" with a vibrant multi-color gradient */}
+        <span
+          className={`text-9xl font-extrabold text-transparent bg-clip-text ${
+            isDarkMode
+              ? 'bg-gradient-to-r from-blue-500 via-purple-500 via-red-500 to-yellow-500'
+              : 'bg-gradient-to-r from-blue-500 via-purple-500 via-red-500 to-yellow-500'
+          } animate__animated animate__fadeIn animate__delay-1s`}
+        >
+          A
+        </span>
 
-      <div className="absolute top-3/4 flex justify-center items-center">
-        <div className={`animate-pulse ${isDarkMode ? 'text-teal-400' : 'text-indigo-500'} text-lg font-extrabold shadow-md`}>
-          <span className={`bg-clip-text text-transparent ${isDarkMode ? 'bg-gradient-to-r from-teal-300 to-teal-500' : 'bg-gradient-to-r from-indigo-400 to-indigo-600'}`}>
-            Loading...
-          </span>
+        {/* Rotating Circle with extra gradient colors */}
+        <div className="absolute inset-0 flex justify-center items-center">
+          <div
+            className={`w-64 h-64 border-8 border-t-8 ${
+              isDarkMode
+                ? 'border-white'
+                : 'border-gradient-to-r from-blue-500 via-purple-500 via-red-500 to-yellow-500'
+            } rounded-full animate-spin ring-4 ring-opacity-50 ring-white`}
+          ></div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

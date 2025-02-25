@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { CiLinkedin } from 'react-icons/ci';
 import { RiTwitterXLine } from 'react-icons/ri';
@@ -7,89 +7,95 @@ import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
 const Header = ({ toggleTheme, isDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(false);
 
   // Toggle mobile menu open/close
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Show navbar with animation on mount
+  useEffect(() => {
+    setIsNavbarVisible(true);
+  }, []);
+
   // Navigation links
   const links = (
     <>
-      <li className="text-lg"><NavLink to="/about">About</NavLink></li>
-      <li className="text-lg"><NavLink to="/work">Work</NavLink></li>
-      <li className="text-lg"><NavLink to="/contacts">Contacts</NavLink></li>
-      <li className="text-lg"><NavLink to="/tech">Tech Stack</NavLink></li>
-    </>
+    <li className="text-lg"><NavLink to="/about">About</NavLink></li>
+    <li className="text-lg"><NavLink to="/work">Work</NavLink></li>
+    <li className="text-lg"><NavLink to="/contacts">Contacts</NavLink></li>
+    <li className="text-lg"><NavLink to="/tech">Tech Stack</NavLink></li>
+  </>
   );
 
   return (
-    <div className="navbar px-4 md:px-48 dark:text-stone-50 text-neutral-900 relative z-50">
-      {/* Logo and Menu for Small Devices */}
-      <div className="navbar-start md:hidden flex items-center justify-between w-full">
+    <div className={`navbar px-4 md:px-48 dark:text-stone-50 text-neutral-900 relative z-50 
+      transform transition-all duration-700 ${isNavbarVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"}`}>
+
+      {/* Logo and Menu Button */}
+      <div className="navbar-start md:flex lg:hidden flex items-center justify-between w-full">
         <NavLink to="/" className="btn btn-ghost text-xl">
-          <img className="w-[40px] h-[26px]" src="https://i.ibb.co.com/6ZqJb0d/AR-portfolio-1.png" alt="Logo" />
+          <img className="w-[40px] h-[26px]" src="https://i.ibb.co/6ZqJb0d/AR-portfolio-1.png" alt="Logo" />
         </NavLink>
-        {/* Mobile menu toggle button */}
-        <button onClick={handleMenuToggle} className="text-2xl">
+        <button onClick={handleMenuToggle} className={`text-2xl transition-transform duration-300 ${isMenuOpen ? "rotate-90" : "rotate-0"}`}>
           {isMenuOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      {isMenuOpen && (
-        <ul className="menu menu-compact absolute top-16 left-0 w-full bg-stone-50 dark:text-stone-50 text-neutral-900 dark:bg-black p-4 z-50 text-center">
-          {links}
-        </ul>
-      )}
+      {/* Mobile Menu */}
+      <ul className={`menu menu-compact absolute top-16 left-0 w-full bg-stone-50 dark:bg-black p-4 z-50 text-center md:hidden 
+        transition-all duration-500 ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-5 invisible"}`}>
+        {links}
+      </ul>
 
       {/* Centered Logo for larger screens */}
-      <div className="navbar-center md:flex hidden">
+      <div className="navbar-center hidden lg:flex">
         <NavLink to="/" className="btn btn-ghost">
-          <img className="w-[39px] h-[39px]" src="https://i.ibb.co.com/6ZqJb0d/AR-portfolio-1.png" alt="Logo" />
+          <img className="w-[39px] h-[39px]" src="https://i.ibb.co/6ZqJb0d/AR-portfolio-1.png" alt="Logo" />
         </NavLink>
       </div>
 
       {/* Navigation Links for larger screens */}
       <div className="navbar-start hidden lg:flex justify-center gap-8">
-        <ul className="menu menu-horizontal px-1 text-lg">
-          {links}
-        </ul>
+        <ul className="menu menu-horizontal px-1 text-lg">{links}</ul>
       </div>
 
       {/* Social Icons */}
       <div className="navbar-end gap-6">
-        <a href="https://www.linkedin.com/in/araby-hossain-abid-6790a5318/" className="text-2xl hidden sm:block">
-          <CiLinkedin />
-        </a>
-        <a href="https://x.com/AbidAraby" className="text-2xl hidden sm:block">
-          <RiTwitterXLine />
-        </a>
-        <a href="https://github.com/Abid-2743" className="text-2xl hidden sm:block">
-          <FaGithub />
-        </a>
+        {[{ href: "https://www.linkedin.com/in/araby-hossain-abid-6790a5318/", icon: <CiLinkedin /> },
+          { href: "https://x.com/AbidAraby", icon: <RiTwitterXLine /> },
+          { href: "https://github.com/Abid-2743", icon: <FaGithub /> }].map(({ href, icon }, index) => (
+          <a key={index} href={href} className="text-2xl hidden sm:block transition-transform duration-300 hover:scale-110">
+            {icon}
+          </a>
+        ))}
       </div>
 
-      {/* Dark Mode Toggle */}
+      {/* Dark Mode Toggle with enhanced animation */}
       <button onClick={toggleTheme} className="ms-2">
-        {isDarkMode ? (
-          <svg
-            className="h-8 w-8 fill-current text-yellow-500" // Change color based on theme
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24">
-            <path
-              d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
-          </svg>
-        ) : (
-          <svg
-            className="h-8 w-8 fill-current text-gray-800" // Change color based on theme
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24">
-            <path
-              d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
-          </svg>
-        )}
-      </button>
+  {isDarkMode ? (
+    <svg
+      className="h-8 w-8 fill-current text-yellow-500 hover:animate-spin" // Add hover:animate-spin
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"
+      />
+    </svg>
+  ) : (
+    <svg
+      className="h-8 w-8 fill-current text-gray-800 hover:animate-spin" // Add hover:animate-spin
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"
+      />
+    </svg>
+  )}
+</button>
     </div>
   );
 };

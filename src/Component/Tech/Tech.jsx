@@ -11,7 +11,7 @@ function Tech() {
   const renderTechSection = (title, items, showButton = true) => (
     <div className="mb-12">
       <h1 className="text-3xl font-bold mb-6">{title}</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-y-10">
         {items.map((tech) => (
           <a
             key={tech.id}

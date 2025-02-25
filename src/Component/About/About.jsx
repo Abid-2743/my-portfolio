@@ -1,7 +1,6 @@
 import { IoSendOutline } from "react-icons/io5";
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
 const About = () => {
   return (
     <div className="flex flex-col lg:px-52 px-10 py-16  text-neutral-900 dark:text-stone-50">
@@ -34,7 +33,18 @@ const About = () => {
             </div>
             
             <div className='mt-16'>
-              Feel free to reach out via <a className='text-stone-50 link link-hover' href="mailto:arabyhossainabid@gmail.com">e-mail</a>, or follow me on <a className='text-stone-50 link link-hover' href="https://x.com/AbidAraby">Twitter</a>.
+              Feel free to reach out via 
+              <a className='text-stone-50 link' href="mailto:arabyhossainabid@gmail.com">e-mail</a>,
+               or follow me on 
+               <a className='text-stone-50 link' href="https://x.com/AbidAraby">Twitter</a>.
+                Want to see where I’ve worked? Check out my 
+              <button
+        onClick={() => window.open('/resume/resume.pdf', '_blank')}
+        className="resume-button ps-2 text-stone-50 link"
+        aria-label="Resume">
+        Resume</button>, 
+        or Connect with me on 
+        <a className='text-stone-50 link' href="https://www.linkedin.com/in/araby-hossain-abid-6790a5318/">LinkedIn</a>
               <p className='mt-10'>Let’s build something great,</p>
               <p className="italic text-2xl">Araby Hossain Abid</p>
             </div>
